@@ -1,3 +1,5 @@
+Esse sistema foi criado com Vibe Coding utilizando a IDE Google Antigravity e o modelo Gemini PRO 3.1.
+
 Abaixo está a compilação cronológica de todos os prompts fornecidos pelo usuário para a criação e refinamento do sistema 'LáMenina! análise de dados':
 
 ---
