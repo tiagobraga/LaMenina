@@ -63,3 +63,6 @@ Para inferência temporal do debate interinstitucional, através do engate algor
 Voltado a decodificar os vetores narrativos dominantes sem indução apriorística, de maneira agnóstica às plataformas se o usuário não lhes aplicar filtros direcionadores.
 * **Como funciona:** Quebra semanticamente (Tokenization - suportando acentos em Língua Portuguesa) o léxico total das colônias de mensagens da planilha e subtrai uma vasta extensão nativa pre-setada de "Stop Words" (conectivos sem valor expressivo de sentido autônomo e abreviações da Web como 'htpps', pronomes oblíquos etc).  A renderização da elipse visual concede tamanhos maiores a léxicos mais propulsados e centrais na pauta coletiva.
 * **Ferramenta Oculta:** Pausando o mouse em certas expressões dominantes, será emitido uma "dica" flutuante (hint tooltip) relatando o index matemático da frequência total para a dada palavra em tempo real – contornando a necessidade de contagem mental exultante baseada no mero "tamanho visual".
+
+## Citação
+`BRAGA, Tiago. LáMenina! análise de dados. [S. l.]: Repositório GitHub, 2026. Software de análise exploratória e grafos para redes sociais. Disponível em: https://github.com/tiagobraga/LaMenina. Acesso em: 8 mar. 2026.`
