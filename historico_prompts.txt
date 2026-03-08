@@ -1,0 +1,80 @@
+Abaixo está a compilação cronológica de todos os prompts fornecidos pelo usuário para a criação e refinamento do sistema 'LáMenina! análise de dados':
+
+---
+
+1. GERAÇÃO INICIAL DO SISTEMA
+"Será necessário criar uma página de análise do arquivo excel chamado laminina.xlsx que está na pasta deste projeto. A ideia é extrair análises de redes a partir do arquivo selecionado. As seguintes análises precisamo ser realizadas e apresentadas na tela de forma gráfica. Este arquivo contem postagens de diversos usuários de diferentes redes sociais que discutiram o tema laminina. 
+1. organização das postagens por tipo baseado na coluna socialNetwork, organizando as com mais relevância na frente. Os aspectos de relevância são considerados a partir dos quantitativos das colunas likes, comments e shares com os seguintes pesos (likes = 1, comments = 1.6 e shares = 2). A organização das postagens deve ter paginação e deve ser possível aplicar uma filtragem de acordo com os seguintes atributos (relevância, likes, comments e shares). 
+2. é necessário criar uma rede de conexão a partir da coluna usernameAuthor e a quantidade de vezes que cada usernameAuthor é citado na coluna message. Devem ser definidas cores para o grafo baseando-se no sentimento geral da postagem. 
+3. Gráfico temporal com a quantidade de vezes que as postagens foram efetuadas.
+4. Nuvem de palavras utilizando o texto da mensagem."
+
+2. REFINAMENTOS DE LAYOUT E GRAFOS
+"Será necessário fazer algumas alterações no sistema, são elas: 
+a) cada um dos quatro módulos do sistema deve ocupar uma linha inteira da página, ou seja, os quatro módulos ficarão um abaixo do outro. 
+b) no segundo módulo, de grafos, o tamanho de cada vértice deverá ser proporcional à quantidade de ligações que ele possui. Além disso, ao passar o cursor sobre o nó, tem que mostrar um janela flutuante com o texto correspondente à postagem. Nessa janela flutuante também será identificada a rede social utilizada para fazer a postagem."
+
+3. REFINAMENTOS DE UX, TOOLTIPS E TEXTOS
+"Será necessário fazer mais alguns ajustes, conforme segue. 
+No módulo 1: A páginação está ótima, mas é necessário colocar na navegação entre páginas uma opção de ir para uma página específica. 
+No módulo 2: O hint funciona bem, mas é necessário incrementar a formatação. O ideal é que a janela flutuante tenha um tamanho fixo, incluindo rolagem se o texto for muito grande. A formatação precisa parecer mais com a de uma postagem de rede social e o plataforma digital de origem da postagem deve ser identificada por uma cor, que deve ser a mesma utilizada para identificar as plataformas no módulo 3. 
+No módulo 3: No hint com a contagem do número de postagens por plataforma, coloque as plataformas e o número de postagens em ordem crescente. 
+No módulo 4: Tem uma palavra que está escrita como "ncia", minha suspeita é que é uma parte da palavra "ciência" que foi cortada por alguma codificação. Investigue isso e, se for o caso, resolva este problema."
+
+4. TROUBLESHOOTING
+"O sistema não está funcionando. Verifique o que aconteceu."
+
+5. ALTERAÇÃO MATEMÁTICA, FILTROS E STOPWORDS
+"São necessárias mais algumas alterações nos módulos, conforme descrito a seguir. 
+Módulo 1: O cálculo de relevância deve ser alterado. A fórmula deve ser a seguinte: 
+Somareacoes = número de comentários + número de curtidas + número de compartilhamentos 
+Pesocomentarios = 1 / (número de comentários / Somareacoes * 3) 
+Pesocurtidas = 1 / (número de curtidas / Somareacoes * 3) 
+Pesocompartilhamentos = 1 / (número de compartilhamentos / Somareacoes * 3) 
+Relevância = (número de comentários * Pesocomentarios) + (número de curtidas * Pesocurtidas) + (número de compartilhamentos * Pesocompartilhamentos) 
+Módulo 2: É necessário adicionar um filtro por tipo de plataforma (socialNetwork) para que seja gerado um grafo apenas com as redes sociais escolhidas 
+Módulo 3: O hint com o número de postagens deve ser organizado de forma decrescente 
+Módulo 4: Refinar as "stop words", palavras como "ainda", "www", entre outras ainda estão sendo exibidas."
+
+6. NOVOS INDICADORES DE TELA E NUVEM
+"Serão necessárias mais algumas mudanças em alguns módulos conforme descrito a seguir. 
+Módulo 2: Colocar um hint no canto superior esquerdo indicando o número de postagens neutras, positivas e negativas do grafo que está sendo apresentado. Esse número deve ser atualizado sempre que o filtro for aplicado. 
+Módulo 4: Ao passar o mouse sobre uma palavra da nuvem de palavras deve aparecer um hint com o número de vezes que essa palavra aparece."
+
+7. RÁCIOS PERCENTUAIS NO GRAFO
+"No módulo 2, além do número de neutros, positivos e negativos, insira logo após o número o percentual que esse número representa da quantidade de nós, ou seja, a soma dos nós neutros, positivos e negativos."
+
+8. TELA CHEIA E GRÁFICO GLOBAL
+"Será necessário fazer duas novas alterações. 
+No módulo 2 é preciso colocar um botão para ver o módulo 2 em tela cheia de forma a facilitar a análise dos nós. 
+No módulo 3, além das linhas para cada rede social, é necessário adicionar uma linha com a soma das postagens de todas as redes sociais."
+
+9. DETALHAMENTO DO TELA CHEIA - PARTE 1
+"Quando colocar o módulo 2 em fullscreen, a área em que o gráfico é impresso tem que aumentar usando o máximo de espaço disponível."
+
+10. DETALHAMENTO DO TELA CHEIA - PARTE 2
+"Quando ativa o modo fullscreen no módulo o grafo não é exibido."
+
+11. TÍTULO E DOCUMENTAÇÃO ACADÊMICA
+"O título da página deverá ser atualizado para 'LáMenina! análise de dados'. 
+Atualize o Walkthrough.md para contemplar as características do sistema de forma a documentá-lo para uso por terceiros futuramente. Em especial, atualize as informações sobre a fórmula utilizada para calcular a relevância de cada postagem. O foco desse documento é permitir que outros pesquisadores possam utilizar o sistema para futuras análise."
+
+12. CITAÇÕES ACADÊMICAS ESPECÍFICAS
+"Atualize o documento com base nos dois comentários: 
+- 'inicialmente desenvolvido para analisar o tema Laminina, mas que pode ser utilizado para análise de qualquer tema em redes sociais.' 
+- 'Esse cálculo de relevância é baseado no trabalho acadêmico: SILVA, Ilaydiany Oliveira da; GOUVEIA, Fabio Castro. Engajamento informacional nas redes sociais: como calcular?. 2021.'"
+
+13. DEPLOY GITHUB
+"Submeta o sistema para a conta do github."
+
+14. SEGURANÇA E LGPD (EXCLUSÃO DE DADOS SENSÍVEIS)
+"Antes de fazer esse passo manual, quero que você exclua os arquivos excel do processo de envio para o github, pois eles possuem dados pessoais e sensíveis."
+
+15. REPOSITÓRIO REMOTO
+"https://github.com/tiagobraga/LaMenina.git"
+
+16. README FILE
+"Use o artefato Walkthrough como o arquivo README do repositório git"
+
+17. COMPILAÇÃO DE PROMPTS
+"Gere um arquivo txt com a compilação de todos os prompts que eu submeti durante a criação desse sistema."
