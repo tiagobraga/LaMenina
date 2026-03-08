@@ -5,6 +5,17 @@ O sistema **LáMenina! análise de dados** é uma ferramenta de inspeção visua
 ## 1. Funcionamento Base e Input
 Nenhuma instalação ou configuração de servidor complexa é necessária. O pesquisador apenas deve possuir o arquivo de corpus `laminina.xlsx`. Ao executar o arquivo `index.html` em uma aba do navegador, a interface inicial permitirá o upload (leitura local via *SheetJS*) do arquivo Excel, sem envio para servidores externos, mantendo a privacidade e sigilo dos dados do pesquisador. 
 
+**Dicionário de Dados Obrigatório (Colunas do Excel):**
+Para que os 4 módulos operem corretamente, a planilha importada deve possuir (na primeira aba) um cabeçalho contendo exatamente os seguintes nomes de colunas:
+- `socialNetwork`: (Texto) Plataforma de origem (ex: Twitter, Facebook, TikTok).
+- `usernameAuthor`: (Texto) Identificador ou conta do autor da publicação.
+- `createdAt`: (Data/Tempo) O carimbo de data original da publicação.
+- `sentiment`: (Texto) Classificação algorítmica ou manual de valência (`POSITIVE`, `NEGATIVE`, `NEUTRAL`).
+- `message`: (Texto) O corpo de texto da publicação em si.
+- `likes`: (Numérico) Total de curtidas ou interações de endosso.
+- `comments`: (Numérico) Total de respostas ou ramificações da conversa.
+- `shares`: (Numérico) Total de replicações ou compartilhamentos.
+
 ## 2. Cálculo da Métrica de Relevância Teórica
 Para organizar hierarquicamente as postagens mais determinantes no conjunto de dados, o algoritmo do LáMenina não recai na ordenação simplória de uma única métrica (apenas likes, por exemplo).  Ele calcula dinamicamente uma **Relevância Ponderada e Dinâmica** que recompensa a desproporcionalidade de ações de maior peso cognitivo do usuário real.
 
