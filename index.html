@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LáMenina! análise de dados</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Libraries -->
+    <!-- SheetJS -->
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    <!-- vis-network -->
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <!-- wordcloud2.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wordcloud2.js/1.2.2/wordcloud2.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="topbar">
+        <div class="logo">
+            <span class="logo-icon">✨</span>
+            <h1>LáMenina! análise de dados</h1>
+        </div>
+    </header>
+
+    <!-- Upload Section -->
+    <section id="upload-section" class="glass-panel text-center">
+        <h2>Bem-vindo(a) ao Dashboard</h2>
+        <p>Para visualizar as análises de rede e insights, por favor, selecione o arquivo <strong>laminina.xlsx</strong>
+            que encontra-se na raiz do projeto (ou o arquivo desejado).</p>
+
+        <label for="excel-upload" class="premium-button">
+            Carregar Arquivo Excel
+            <input type="file" id="excel-upload" accept=".xlsx, .xls">
+        </label>
+        <p id="upload-error" class="error-msg" style="display: none;"></p>
+    </section>
+
+    <!-- Dashboard Content (hidden until file loaded) -->
+    <main id="dashboard-content" style="display: none;">
+
+        <!-- Global Stats Row -->
+        <div class="dashboard-row stats-row">
+            <div class="stat-card glass-panel">
+                <h3>Total de Postagens</h3>
+                <p id="stat-total-posts">0</p>
+            </div>
+            <div class="stat-card glass-panel">
+                <h3>Total de Usuários</h3>
+                <p id="stat-total-users">0</p>
+            </div>
+            <div class="stat-card glass-panel">
+                <h3>Redes Sociais</h3>
+                <p id="stat-total-networks">0</p>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+
+            <!-- Posts Component -->
+            <section class="dashboard-card js-card posts-section">
+                <header class="card-header">
+                    <h2>Postagens Mais Relevantes</h2>
+                    <div class="filters">
+                        <select id="filter-network" class="modern-select">
+                            <option value="all">Todas as Redes</option>
+                        </select>
+                        <select id="sort-by" class="modern-select">
+                            <option value="relevancia">Ordem de Relevância</option>
+                            <option value="likes">Mín. Likes</option>
+                            <option value="comments">Mín. Comentários</option>
+                            <option value="shares">Mín. Compartilhamentos</option>
+                        </select>
+                    </div>
+                </header>
+                <div id="posts-container" class="posts-list">
+                    <!-- Posts dynamically inserted here -->
+                </div>
+                <div class="pagination">
+                    <button class="premium-button-small" id="prev-page" disabled>Anterior</button>
+                    <div class="page-jump">
+                        <span>Página </span>
+                        <input type="number" id="page-input" min="1" value="1" class="modern-input"
+                            style="width: 60px; text-align: center; padding: 0.2rem; margin: 0 0.5rem;"
+                            title="Ir para a página">
+                        <span id="page-info"> de 1</span>
+                    </div>
+                    <button class="premium-button-small" id="next-page">Próxima</button>
+                </div>
+            </section>
+
+            <!-- Network Graph Component -->
+            <section class="dashboard-card js-card network-section">
+                <header class="card-header">
+                    <div>
+                        <h2>Rede de Citações</h2>
+                        <p class="subtitle">Nós: Autores | Cores por Sentimento</p>
+                    </div>
+                    <div class="filters">
+                        <select id="graph-filter-network" class="modern-select">
+                            <!-- Populated dynamically -->
+                        </select>
+                        <button id="btn-fullscreen-graph" class="btn-icon" title="Tela Cheia">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
+                            </svg>
+                        </button>
+                    </div>
+                </header>
+                <div class="graph-wrapper" style="position: relative;">
+                    <div id="graph-sentiment-info" class="glass-panel"
+                        style="position:absolute; top:10px; left:10px; z-index:10; padding:10px; font-size:12px; pointer-events:none; background:rgba(22,27,34,0.85); display:none;">
+                        <!-- Updated by JS -->
+                    </div>
+                    <div id="network-graph" class="graph-container"></div>
+                    <div id="custom-network-tooltip" class="glass-panel"
+                        style="display:none; position:absolute; z-index:1000; width:340px; max-height:300px; overflow-y:auto; padding:0; pointer-events:auto; font-size: 0.85rem;">
+                    </div>
+                </div>
+                <div class="legend">
+                    <span class="legend-item"><span class="color-box" style="background:#8b5cf6"></span> NEUTRAL</span>
+                    <span class="legend-item"><span class="color-box" style="background:#10b981"></span> POSITIVE</span>
+                    <span class="legend-item"><span class="color-box" style="background:#ef4444"></span> NEGATIVE</span>
+                </div>
+            </section>
+
+            <!-- Timeline Chart Component -->
+            <section class="dashboard-card js-card timeline-section">
+                <header class="card-header">
+                    <h2>Volume de Postagens por Período</h2>
+                </header>
+                <div class="chart-container">
+                    <canvas id="timelineChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Word Cloud Component -->
+            <section class="dashboard-card js-card wordcloud-section">
+                <header class="card-header">
+                    <h2>Nuvem de Palavras Relacionadas</h2>
+                    <div class="filters">
+                        <select id="cloud-filter-network" class="modern-select">
+                            <!-- Populated dynamically -->
+                        </select>
+                        <select id="cloud-filter-author" class="modern-select">
+                            <!-- Populated dynamically -->
+                        </select>
+                        <input type="date" id="cloud-filter-date" class="modern-input"
+                            title="Filtrar por data específica">
+                    </div>
+                </header>
+                <div id="wordcloud-wrapper" class="wordcloud-container" style="position: relative;">
+                    <canvas id="wordcloudCanvas"></canvas>
+                    <div id="cloud-tooltip" class="glass-panel"
+                        style="display:none; position:absolute; z-index:1000; padding:8px 12px; font-size:13px; pointer-events:none; white-space:nowrap;">
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
