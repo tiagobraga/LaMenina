@@ -65,4 +65,4 @@ Voltado a decodificar os vetores narrativos dominantes sem indução apriorísti
 * **Ferramenta Oculta:** Pausando o mouse em certas expressões dominantes, será emitido uma "dica" flutuante (hint tooltip) relatando o index matemático da frequência total para a dada palavra em tempo real – contornando a necessidade de contagem mental exultante baseada no mero "tamanho visual".
 
 ## Citação
-`BRAGA, Tiago. LáMenina! análise de dados. [S. l.]: Repositório GitHub, 2026. Software de análise exploratória e grafos para redes sociais. Disponível em: https://github.com/tiagobraga/LaMenina. Acesso em: 8 mar. 2026.`
+`BRAGA, Tiago Emmanuel Nunes. LáMenina! análise de dados. [S. l.]: Repositório GitHub, 2026. Software de análise exploratória e grafos para redes sociais. Disponível em: https://github.com/tiagobraga/LaMenina. Acesso em: 8 mar. 2026.`
