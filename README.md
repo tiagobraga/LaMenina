@@ -3,7 +3,7 @@
 O sistema **LáMenina! análise de dados** é uma ferramenta de inspeção visual de métricas acadêmicas, construída como uma *Single Page Application* (SPA) executada de forma nativa no navegador web do pesquisador. O objetivo do sistema é analisar o engajamento, sentimento e as relações construídas entre usuários em diversas redes sociais, inicialmente desenvolvido para analisar o tema Laminina, mas que pode ser utilizado para análise de qualquer tema em redes sociais.
 
 ## 1. Funcionamento Base e Input
-Nenhuma instalação ou configuração de servidor complexa é necessária. O pesquisador apenas deve possuir o arquivo de corpus `laminina.xlsx`. Depois deve baixar os arquivos index.html, app.js e styles.css para uma pasta. Ao executar o arquivo `index.html` em uma aba do navegador, a interface inicial permitirá o upload (leitura local via *SheetJS*) do arquivo Excel, sem envio para servidores externos, mantendo a privacidade e sigilo dos dados do pesquisador. 
+Nenhuma instalação ou configuração de servidor complexa é necessária. O pesquisador apenas deve possuir um arquivo em formato XLSX seguindo a estrutura de campos abaixo. Depois deve baixar os arquivos index.html, app.js e styles.css para uma pasta. Ao executar o arquivo `index.html` em uma aba do navegador, a interface inicial permitirá o upload (leitura local via *SheetJS*) do arquivo Excel, sem envio para servidores externos, mantendo a privacidade e sigilo dos dados do pesquisador. 
 
 **Dicionário de Dados Obrigatório (Colunas do Excel):**
 Para que os 4 módulos operem corretamente, a planilha importada deve possuir (na primeira aba) um cabeçalho contendo exatamente os seguintes nomes de colunas:
